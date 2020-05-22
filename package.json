@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint pages --ext .ts,.tsx",
+    "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier -c pages"
+    "format": "prettier -c .",
+    "format:fix": "prettier --write ."
   },
   "dependencies": {
     "next": "9.4.2",
