@@ -1,15 +1,15 @@
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 
-import { GetStaticProps } from "next";
-import Link from "next/link";
+import { GetStaticProps } from 'next';
+import Link from 'next/link';
 
 interface Props {
   notes: string[];
 }
 
 const getStaticProps: GetStaticProps = async () => {
-  const postsDirectory = path.join(process.cwd(), "../zettelkasten/notes");
+  const postsDirectory = path.join(process.cwd(), '../zettelkasten/notes');
   const filenames = fs.readdirSync(postsDirectory);
   return { props: { notes: filenames } };
 };

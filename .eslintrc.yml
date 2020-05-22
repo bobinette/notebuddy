@@ -1,0 +1,15 @@
+---
+extends:
+  - airbnb-typescript
+  - prettier
+  - prettier/react
+plugins:
+  - prettier
+  - react-hooks
+
+rules:
+  '@typescript-eslint/camelcase': 0
+  react/react-in-jsx-scope: 0
+
+parserOptions:
+  project: './tsconfig.json'

@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 
-import unified from "unified";
-import markdown from "remark-parse";
-import remark2rehype from "remark-rehype";
-import rehype2react from "rehype-react";
+import unified from 'unified';
+import markdown from 'remark-parse';
+import remark2rehype from 'remark-rehype';
+import rehype2react from 'rehype-react';
 
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticProps, GetStaticPaths } from 'next';
 
 const processor = unified()
   .use(markdown)
@@ -20,7 +20,7 @@ const processor = unified()
   .use(rehype2react, { createElement: React.createElement });
 
 const getStaticPaths: GetStaticPaths = async () => {
-  const postsDirectory = path.join(process.cwd(), "../zettelkasten/notes");
+  const postsDirectory = path.join(process.cwd(), '../zettelkasten/notes');
   const filenames = fs.readdirSync(postsDirectory);
   return {
     paths: filenames.map((fn) => `/notes/${fn}`),
@@ -32,12 +32,12 @@ const getStaticProps: GetStaticProps = async (ctx) => {
   const slug: string = ctx.params.slug as string;
   const filename = path.join(
     process.cwd(),
-    "..",
-    "zettelkasten",
-    "notes",
+    '..',
+    'zettelkasten',
+    'notes',
     slug
   );
-  const content = fs.readFileSync(filename, "utf-8");
+  const content = fs.readFileSync(filename, 'utf-8');
 
   return {
     props: {
