@@ -56,7 +56,7 @@ const PostPage = ({ slug, content }: Props) => {
   return (
     <>
       <h1>{slug}</h1>
-      {processor.processSync(content).result}
+      {(processor.processSync(content) as any).result}
     </>
   );
 };
