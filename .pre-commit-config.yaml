@@ -1,0 +1,14 @@
+- repo: https://github.com/pre-commit/mirrors-eslint
+  rev: v7.0.0
+  hooks:
+    - id: eslint
+      additional_dependencies:
+        - prettier
+        - react-hooks
+      files: \.(js|jsx|ts|tsx)$
+      types: [file]
+
+- repo: https://github.com/prettier/prettier
+  rev: 2.0.5
+  hooks:
+    - id: prettier
