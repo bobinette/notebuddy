@@ -16,13 +16,20 @@ const getStaticProps: GetStaticProps = async () => {
 
 const HomePage = ({ notes }: Props) => {
   return (
-    <ul>
-      {notes.map((p) => (
-        <li key={p}>
-          <Link href={`/notes/${p}`}>{p}</Link>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {notes.map((p) => (
+          <li key={p}>
+            <Link href={`/notes/${p}`}>
+              <a href={`/notes/${p}`}>{p}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Link href="/new">
+        <a href="/new">Add a note</a>
+      </Link>
+    </>
   );
 };
 
