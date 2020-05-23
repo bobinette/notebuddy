@@ -9,6 +9,7 @@ import remark2rehype from 'remark-rehype';
 import rehype2react from 'rehype-react';
 
 import { GetStaticProps, GetStaticPaths } from 'next';
+import Link from 'next/link';
 
 const processor = unified()
   .use(markdown)
@@ -51,6 +52,9 @@ const PostPage = ({ slug, content }: Props) => {
     <>
       <h1>{slug}</h1>
       {(processor.processSync(content) as any).result}
+      <Link href={`/notes/${slug}/edit`}>
+        <a href={`/notes/${slug}/edit`}>Edit</a>
+      </Link>
     </>
   );
 };

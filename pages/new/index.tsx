@@ -16,7 +16,7 @@ const AddNotePage = () => {
       content,
     });
     router.push(`/notes/${title}.md`);
-  }, [title, content]);
+  }, [title, content, router]);
 
   return (
     <>
