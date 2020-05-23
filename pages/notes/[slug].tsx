@@ -20,7 +20,7 @@ const processor = unified()
   .use(rehype2react, { createElement: React.createElement });
 
 const getStaticPaths: GetStaticPaths = async () => {
-  const postsDirectory = path.join(process.cwd(), '../zettelkasten/notes');
+  const postsDirectory = path.join(process.cwd(), process.env.NOTES_DIR);
   const filenames = fs.readdirSync(postsDirectory);
   return {
     paths: filenames.map((fn) => `/notes/${fn}`),
@@ -30,13 +30,7 @@ const getStaticPaths: GetStaticPaths = async () => {
 
 const getStaticProps: GetStaticProps = async (ctx) => {
   const slug: string = ctx.params.slug as string;
-  const filename = path.join(
-    process.cwd(),
-    '..',
-    'zettelkasten',
-    'notes',
-    slug
-  );
+  const filename = path.join(process.cwd(), process.env.NOTES_DIR, slug);
   const content = fs.readFileSync(filename, 'utf-8');
 
   return {

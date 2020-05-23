@@ -9,7 +9,7 @@ interface Props {
 }
 
 const getStaticProps: GetStaticProps = async () => {
-  const postsDirectory = path.join(process.cwd(), '../zettelkasten/notes');
+  const postsDirectory = path.join(process.cwd(), process.env.NOTES_DIR);
   const filenames = fs.readdirSync(postsDirectory);
   return { props: { notes: filenames } };
 };
