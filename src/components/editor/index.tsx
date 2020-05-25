@@ -33,9 +33,10 @@ const getBlockStyle = (block: ContentBlock): string => {
 interface Props {
   editorState: EditorState;
   onChange(es: EditorState): void;
+  editorKey?: string;
 }
 
-const RichEditor = ({ editorState, onChange }: Props) => {
+const RichEditor = ({ editorState, onChange, editorKey }: Props) => {
   const toggleBlockType = useCallback(
     (blockType: string) => {
       onChange(RichUtils.toggleBlockType(editorState, blockType));
@@ -91,6 +92,7 @@ const RichEditor = ({ editorState, onChange }: Props) => {
       </div>
       <div className="editor-editor">
         <Editor
+          editorKey={editorKey}
           blockStyleFn={getBlockStyle}
           customStyleMap={styleMap}
           editorState={editorState}

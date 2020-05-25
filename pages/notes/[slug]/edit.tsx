@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 import fs from 'fs';
 import path from 'path';
@@ -57,9 +57,6 @@ const draftStateToMarkdown = (state): string => {
 };
 
 const EditPage = ({ slug, content }: Props) => {
-  const [isComponentMounted, setIsComponentMounted] = useState(false);
-  useEffect(() => setIsComponentMounted(true), []);
-
   const [editorState, setEditorState] = useDraftEditorState(content);
 
   const router = useRouter();
@@ -72,21 +69,23 @@ const EditPage = ({ slug, content }: Props) => {
 
   return (
     <>
-      <h1>{slug}</h1>
-      <div>
-        {isComponentMounted ? (
-          <Editor editorState={editorState} onChange={setEditorState} />
-        ) : (
-          <div />
-        )}
+      <div className="flex flex-v-center flex-space">
+        <h1>{slug}</h1>
+        <div className="btn-group">
+          <Link href={`/notes/${slug}`}>
+            <span className="btn btn-link">Cancel</span>
+          </Link>
+          <button type="button" className="btn btn-primary" onClick={onEdit}>
+            Save
+          </button>
+        </div>
       </div>
-      <div className="btn-group">
-        <Link href={`/notes/${slug}`}>
-          <span className="btn btn-link">Cancel</span>
-        </Link>
-        <button type="button" className="btn btn-primary" onClick={onEdit}>
-          Save
-        </button>
+      <div>
+        <Editor
+          editorKey="key-for-ssr"
+          editorState={editorState}
+          onChange={setEditorState}
+        />
       </div>
     </>
   );

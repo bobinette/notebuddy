@@ -50,11 +50,15 @@ interface Props {
 const PostPage = ({ slug, content }: Props) => {
   return (
     <>
-      <h1>{slug}</h1>
+      <div className="flex flex-v-center flex-space">
+        <h1>{slug}</h1>
+        <Link href={`/notes/${slug}/edit`}>
+          <button className="btn btn-link" type="button">
+            Edit
+          </button>
+        </Link>
+      </div>
       {(processor.processSync(content) as any).result}
-      <Link href={`/notes/${slug}/edit`}>
-        <a href={`/notes/${slug}/edit`}>Edit</a>
-      </Link>
     </>
   );
 };

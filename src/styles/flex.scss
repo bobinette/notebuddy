@@ -1,11 +1,15 @@
 .flex {
   display: flex;
-}
 
-.flex.flex-v-center {
-  align-items: center;
-}
+  &.flex-v-center {
+    align-items: center;
+  }
 
-.flex.flex-h-center {
-  justify-content: center;
+  &.flex-h-center {
+    justify-content: center;
+  }
+
+  &.flex-space {
+    justify-content: space-between;
+  }
 }
