@@ -1,0 +1,23 @@
+$color: #d9d9d9;
+$color-muted: scale-color($color, $lightness: -15%);
+
+$color-background: #363a43;
+$color-background-5dp: scale-color($color-background, $lightness: +5%);
+$color-background-10dp: scale-color($color-background, $lightness: +10%);
+$color-background-15dp: scale-color($color-background, $lightness: +15%);
+
+$color-primary: #72bbd1;
+$color-primary-hover: scale-color($color-primary, $lightness: -20%);
+
+$color-orange: #ebc17a;
+$color-orange-background: scale-color(
+  $color-orange,
+  $lightness: -70%,
+  $alpha: -80%
+);
+
+// $color-green: #4acfac;
+$color-green: #8e9b62;
+
+// $color-purple: #7e8ce0;
+$color-purple: #af6597;

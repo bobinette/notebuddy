@@ -1,0 +1,14 @@
+@import 'src/styles/variables.scss';
+
+.card-grid {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.card {
+  background-color: $color-background-5dp;
+
+  border-radius: 5px;
+  padding: 10px;
+}

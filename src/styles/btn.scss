@@ -1,0 +1,57 @@
+@import 'src/styles/variables.scss';
+
+// Reset the default button style
+button {
+  display: inline-block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  // text-align: center;
+  // transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn {
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.btn-primary {
+    color: $color-background;
+    background-color: $color-primary;
+
+    padding: 3px 7px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-primary-hover;
+    }
+  }
+
+  &.btn-link {
+    color: $color-primary;
+
+    &:hover {
+      color: $color-primary-hover;
+    }
+  }
+}
+
+.btn-group {
+  > .btn:not(:last-child) {
+    margin-right: 10px;
+  }
+}
