@@ -63,6 +63,8 @@ const CodeEditor = ({ value, onChange }: Props) => {
         onChange={onChangeLocal}
         onKeyDown={handleKeyDown}
         ref={textareaRef}
+        placeholder="Let me know about your thoughts..."
+        minRows={1}
       />
       <pre className="code-output">
         <code className="language-md">{value}</code>
