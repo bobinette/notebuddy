@@ -3,6 +3,15 @@
 .code-edit-container {
   position: relative;
   margin: 1em 0;
+
+  &::before {
+    position: absolute;
+    left: -10px;
+    top: 0;
+    bottom: 5px;
+    border-left: solid 2px $color-primary;
+    content: '';
+  }
 }
 
 .code-input {

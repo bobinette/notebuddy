@@ -77,30 +77,28 @@ interface Props {
 
 const HomePage = ({ notes }: Props) => {
   return (
-    <>
-      <div className="card-grid">
-        {notes.map((p) => (
-          <div className="card" key={p.filename}>
-            <div>{p.name}</div>
-            <div className="muted flex flex-v-center">
-              <FontAwesomeIcon className="fa-left" icon={faHourglassHalf} />
-              <span>{p.readingTime}</span>
-            </div>
-            <Link href={`/notes/${p.filename}`}>
-              <span className="btn btn-link">Read</span>
-            </Link>
+    <div className="card-grid">
+      {notes.map((p) => (
+        <div className="card" key={p.filename}>
+          <div>{p.name}</div>
+          <div className="muted flex flex-v-center">
+            <FontAwesomeIcon className="fa-left" icon={faHourglassHalf} />
+            <span>{p.readingTime}</span>
           </div>
-        ))}
-        <div className="card flex flex-v-center flex-h-center">
-          <Link href="/new">
-            <div className="btn btn-primary flex flex-v-center">
-              <FontAwesomeIcon className="fa-left" icon={faPlusCircle} />
-              <span>Add a note</span>
-            </div>
+          <Link href={`/notes/${p.filename}`}>
+            <span className="btn btn-link">Read</span>
           </Link>
         </div>
+      ))}
+      <div className="card flex flex-v-center flex-h-center">
+        <Link href="/new">
+          <div className="btn btn-primary flex flex-v-center">
+            <FontAwesomeIcon className="fa-left" icon={faPlusCircle} />
+            <span>Add a note</span>
+          </div>
+        </Link>
       </div>
-    </>
+    </div>
   );
 };
 

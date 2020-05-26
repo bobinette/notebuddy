@@ -12,6 +12,8 @@
 @import 'src/components/editor/editor.scss';
 @import '../../node_modules/prism-themes/themes/prism-nord.css';
 
+@import 'src/components/navbar/navbar.scss';
+
 body {
   color: $color;
   background-color: $color-background;
@@ -23,8 +25,6 @@ body {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.6;
-
-  padding: 0 20px;
 }
 
 a {
@@ -47,8 +47,24 @@ pre > code {
   background-color: $color-orange-background;
 }
 
+input {
+  border: none;
+  background: transparent;
+  border-bottom: solid 1px $color-muted;
+  caret-color: $color;
+
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $color-primary;
+  }
+}
+
 @media (min-width: 1020px) {
-  body {
+  .body {
     max-width: 1020px;
     margin: auto;
   }

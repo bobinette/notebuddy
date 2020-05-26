@@ -1,0 +1,24 @@
+@import 'src/styles/variables.scss';
+
+.navbar {
+  background-color: $color-background-5dp;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+// TODO: move to layout.scss
+.body {
+  padding: 0 20px;
+}
+
+@media (min-width: 1020px) {
+  .body {
+    max-width: 1020px;
+    margin: auto;
+  }
+
+  .navbar-container {
+    margin: auto;
+    width: 1200px;
+  }
+}
