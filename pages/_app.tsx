@@ -1,8 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 
-import 'prismjs';
-
 import 'src/styles/style.scss';
 
 interface Props {

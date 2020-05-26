@@ -6,8 +6,11 @@
 @import 'src/styles/flex.scss';
 @import 'src/styles/text.scss';
 
+// @import 'src/components/draft-editor/editor.scss';
+// @import 'src/components/draft-editor/features/style-button.scss';
+
 @import 'src/components/editor/editor.scss';
-@import 'src/components/editor/features/style-button.scss';
+@import '../../node_modules/prism-themes/themes/prism-nord.css';
 
 body {
   color: $color;
@@ -30,6 +33,10 @@ a {
   &:hover {
     color: $color-primary-hover;
   }
+}
+
+pre > code {
+  cursor: text;
 }
 
 :not(pre) > code {

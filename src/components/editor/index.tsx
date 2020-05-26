@@ -1,110 +1,74 @@
-import React, { useCallback } from 'react';
-import {
-  Editor,
-  EditorState,
-  RichUtils,
-  getDefaultKeyBinding,
-  ContentBlock,
-  EditorCommand,
-} from 'draft-js';
+import React, { useEffect, useCallback, useRef } from 'react';
+import Prism from 'prismjs';
+import TextareaAutosize from 'react-textarea-autosize';
 
-import BlockStyleControls from './features/blocks';
-import InlineStyleControls from './features/inlines';
-
-// Custom overrides for "code" style.
-const styleMap = {
-  CODE: {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 2,
-  },
-};
-
-const getBlockStyle = (block: ContentBlock): string => {
-  switch (block.getType()) {
-    case 'blockquote':
-      return 'blockquote';
-    default:
-      return '';
-  }
+const initAutoloader = async () => {
+  await import('prismjs/plugins/autoloader/prism-autoloader');
+  Prism.plugins.autoloader.languages_path = 'https://prismjs.com/components/';
+  Prism.highlightAll();
 };
 
 interface Props {
-  editorState: EditorState;
-  onChange(es: EditorState): void;
-  editorKey?: string;
+  value: string;
+  onChange(s: string): void;
 }
 
-const RichEditor = ({ editorState, onChange, editorKey }: Props) => {
-  const toggleBlockType = useCallback(
-    (blockType: string) => {
-      onChange(RichUtils.toggleBlockType(editorState, blockType));
-    },
-    [editorState, onChange]
-  );
-  const toggleInlineStyle = useCallback(
-    (blockType: string) => {
-      onChange(RichUtils.toggleInlineStyle(editorState, blockType));
-    },
-    [editorState, onChange]
-  );
-  const handleKeyCommand = useCallback(
-    (command: EditorCommand, es: EditorState) => {
-      const newState = RichUtils.handleKeyCommand(es, command);
-      if (newState) {
-        onChange(newState);
-        return true;
+const CodeEditor = ({ value, onChange }: Props) => {
+  useEffect(() => {
+    initAutoloader();
+  }, []);
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [value]);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleKeyDown = useCallback(
+    (evt: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      // let localValue = value;
+      // const { selectionStart, selectionEnd } = evt.currentTarget;
+
+      // handle 4-space indent on
+      if (evt.key === 'Tab') {
+        evt.preventDefault();
+
+        // This bit does not work for now: the carret goes to the end
+        // of the textarea and the undo/redo history is lost
+        //       const before = localValue.substring(0, selectionStart);
+        //       const after = localValue.substring(selectionEnd);
+        //       localValue = `${before}    ${after}`;
+        //       onChange(localValue);
+        //       textareaRef.current.selectionStart =
+        //         selectionEnd + 4 - (selectionEnd - selectionStart);
+        //       textareaRef.current.selectionEnd =
+        //         selectionEnd + 4 - (selectionEnd - selectionStart);
       }
-      return false;
+    },
+    [value, onChange]
+  );
+
+  const onChangeLocal = useCallback(
+    (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
+      onChange(evt.target.value);
     },
     [onChange]
   );
-  const mapKeyToEditorCommand = useCallback(
-    (evt: React.KeyboardEvent) => {
-      if (evt.keyCode === 9 /* TAB */) {
-        const newEditorState = RichUtils.onTab(
-          evt,
-          editorState,
-          4 /* maxDepth */
-        );
-        if (newEditorState !== editorState) {
-          onChange(newEditorState);
-        }
-        return;
-      }
-      getDefaultKeyBinding(evt);
-    },
-    [editorState, onChange]
-  );
 
   return (
-    <div className="editor-root">
-      <div className="editor-toolbar flex">
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={toggleInlineStyle}
-        />
-        <BlockStyleControls
-          editorState={editorState}
-          onToggle={toggleBlockType}
-        />
-      </div>
-      <div className="editor-editor">
-        <Editor
-          editorKey={editorKey}
-          blockStyleFn={getBlockStyle}
-          customStyleMap={styleMap}
-          editorState={editorState}
-          handleKeyCommand={handleKeyCommand}
-          keyBindingFn={mapKeyToEditorCommand}
-          onChange={onChange}
-          placeholder="Create your note..."
-          spellCheck
-        />
-      </div>
+    <div className="code-edit-container">
+      <TextareaAutosize
+        className="code-input"
+        value={value}
+        onChange={onChangeLocal}
+        onKeyDown={handleKeyDown}
+        ref={textareaRef}
+      />
+      <pre className="code-output">
+        <code className="language-md">{value}</code>
+      </pre>
     </div>
   );
 };
 
-export default RichEditor;
+export default CodeEditor;

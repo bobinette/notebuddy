@@ -17,8 +17,13 @@ export default class Document extends NextDocument {
             rel="stylesheet"
             href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css"
           />
+          {/* <link
+            rel="stylesheet"
+            href="//cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-dark.min.css"
+          /> */}
         </Head>
         <body>
+          {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/autoloader/prism-autoloader.min.js" /> */}
           <Main />
           <NextScript />
         </body>

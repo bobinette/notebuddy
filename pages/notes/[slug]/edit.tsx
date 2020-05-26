@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import fs from 'fs';
 import path from 'path';
@@ -8,10 +8,13 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
-import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js';
+// import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+// import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js';
+// import PrismDecorator from 'draft-js-prism';
 
 import Editor from 'src/components/editor';
+
+// const decorator = new PrismDecorator();
 
 const getStaticProps: GetStaticProps = async (ctx) => {
   const slug: string = ctx.params.slug as string;
@@ -40,32 +43,47 @@ interface Props {
   content: string;
 }
 
-const useDraftEditorState = (markdownString: string) => {
-  const rawData = markdownToDraft(markdownString);
-  const contentState = convertFromRaw(rawData);
-  const [state, setState] = useState(
-    EditorState.createWithContent(contentState)
-  );
+// const useDraftEditorState = (markdownString: string) => {
+//   const rawData = markdownToDraft(markdownString);
+//   const contentState = convertFromRaw(rawData);
+//   const [state, setState] = useState(
+//     EditorState.createWithContent(contentState, decorator)
+//   );
 
-  return [state, setState];
-};
+//   const updateState = useCallback(
+//     (newState: EditorState) => {
+//       setState(EditorState.set(newState, { decorator }));
+//     },
+//     [setState]
+//   );
 
-const draftStateToMarkdown = (state): string => {
-  const content = state.getCurrentContent();
-  const rawObject = convertToRaw(content);
-  return draftToMarkdown(rawObject);
-};
+//   console.log(state.toJS());
+
+//   return [state, updateState];
+// };
+
+// const draftStateToMarkdown = (state): string => {
+//   const content = state.getCurrentContent();
+//   const rawObject = convertToRaw(content);
+//   return draftToMarkdown(rawObject);
+// };
 
 const EditPage = ({ slug, content }: Props) => {
-  const [editorState, setEditorState] = useDraftEditorState(content);
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
+
+  // const [editorState, setEditorState] = useDraftEditorState(content);
+  const [updatedContent, setUpdatedContent] = useState(content);
 
   const router = useRouter();
-  const onEdit = useCallback(async () => {
+  const onSave = useCallback(async () => {
+    // const updatedContent = draftStateToMarkdown(editorState)
     await axios.post(`/api/notes/${slug}`, {
-      content: draftStateToMarkdown(editorState),
+      content: updatedContent,
     });
     router.push(`/notes/${slug}`);
-  }, [slug, editorState, router]);
+    // }, [slug, editorState, router]);
+  }, [slug, updatedContent, router]);
 
   return (
     <>
@@ -75,17 +93,18 @@ const EditPage = ({ slug, content }: Props) => {
           <Link href={`/notes/${slug}`}>
             <span className="btn btn-link">Cancel</span>
           </Link>
-          <button type="button" className="btn btn-primary" onClick={onEdit}>
+          <button type="button" className="btn btn-primary" onClick={onSave}>
             Save
           </button>
         </div>
       </div>
       <div>
-        <Editor
-          editorKey="key-for-ssr"
-          editorState={editorState}
-          onChange={setEditorState}
-        />
+        {isMounted ? (
+          // <Editor editorState={editorState} onChange={setEditorState} />
+          <Editor value={updatedContent} onChange={setUpdatedContent} />
+        ) : (
+          <div />
+        )}
       </div>
     </>
   );

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Prism from 'prismjs';
 
 import fs from 'fs';
 import path from 'path';
@@ -11,13 +12,15 @@ import rehype2react from 'rehype-react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 
+const initAutoloader = async () => {
+  await import('prismjs/plugins/autoloader/prism-autoloader');
+  Prism.plugins.autoloader.languages_path = 'https://prismjs.com/components/';
+  Prism.highlightAll();
+};
+
 const processor = unified()
   .use(markdown)
-  // .use(slug)
-  // .use(toc)
-  // .use(github, {repository: 'rehypejs/rehype-react'})
   .use(remark2rehype)
-  // .use(highlight)
   .use(rehype2react, { createElement: React.createElement });
 
 const getStaticPaths: GetStaticPaths = async () => {
@@ -48,6 +51,10 @@ interface Props {
 }
 
 const PostPage = ({ slug, content }: Props) => {
+  useEffect(() => {
+    initAutoloader();
+  }, []);
+
   return (
     <>
       <div className="flex flex-v-center flex-space">

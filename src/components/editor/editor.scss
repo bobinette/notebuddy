@@ -1,5 +1,89 @@
-.editor-toolbar {
-  > div {
-    margin-right: 2rem;
-  }
+@import 'src/styles/variables.scss';
+
+.code-edit-container {
+  position: relative;
+  margin: 1em 0;
+}
+
+.code-input {
+  width: 100%;
+
+  resize: none;
+  padding: 0;
+
+  caret-color: $color;
+
+  color: transparent;
+  background-color: $color-background;
+  font-family: inherit;
+  font-size: inherit;
+
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.code-output {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  white-space: pre-wrap;
+  line-height: 1.15;
+  word-wrap: break-word;
+  font-size: 1rem;
+}
+
+.code-input {
+  opacity: 1;
+  margin: 0;
+  // color: hsl(0, 0%, 40%);
+  resize: none;
+}
+
+.code-output {
+  pointer-events: none;
+  z-index: 3;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.code-edit-container code {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  // padding: 1rem;
+  display: block;
+  // color: hsl(0, 0%, 40%);
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* overrides */
+.code-edit-container code[class*='language-'],
+.code-edit-container :not(pre) > code[class*='language-'],
+.code-edit-container pre[class*='language-'] {
+  color: $color;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  line-height: 1.15;
+  white-space: pre-wrap;
+  text-shadow: none;
+  font-family: inherit;
+  font-size: inherit;
 }
