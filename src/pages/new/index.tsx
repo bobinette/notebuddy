@@ -4,8 +4,8 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Editor from 'src/components/editor';
-import useInput from 'src/hooks/useInput';
+import Editor from 'components/editor';
+import useInput from 'hooks/useInput';
 
 const AddNotePage = () => {
   const router = useRouter();

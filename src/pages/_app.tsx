@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 
-import Layout from 'src/components/layout';
+import Layout from 'components/layout';
 
-import 'src/styles/style.scss';
+import 'styles/style.scss';
 
 interface Props {
   Component: React.ElementType;

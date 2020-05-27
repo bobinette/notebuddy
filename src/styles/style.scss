@@ -1,18 +1,18 @@
-@import 'src/styles/variables.scss';
+@import 'styles/variables.scss';
 
-@import 'src/styles/btn.scss';
-@import 'src/styles/card.scss';
-@import 'src/styles/fa.scss';
-@import 'src/styles/flex.scss';
-@import 'src/styles/text.scss';
+@import 'styles/btn.scss';
+@import 'styles/card.scss';
+@import 'styles/fa.scss';
+@import 'styles/flex.scss';
+@import 'styles/text.scss';
 
-// @import 'src/components/draft-editor/editor.scss';
-// @import 'src/components/draft-editor/features/style-button.scss';
+// @import 'components/draft-editor/editor.scss';
+// @import 'components/draft-editor/features/style-button.scss';
 
-@import 'src/components/editor/editor.scss';
+@import 'components/editor/editor.scss';
 @import '../../node_modules/prism-themes/themes/prism-nord.css';
 
-@import 'src/components/navbar/navbar.scss';
+@import 'components/navbar/navbar.scss';
 
 body {
   color: $color;

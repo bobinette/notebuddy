@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { save } from 'src/api/github';
+import { save } from 'api/github';
 /**
  * DO NOT USE THIS ENDPOINT. Only used for testing the
  * Github call.

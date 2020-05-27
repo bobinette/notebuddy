@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 // import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js';
 // import PrismDecorator from 'draft-js-prism';
 
-import Editor from 'src/components/editor';
+import Editor from 'components/editor';
 
 // const decorator = new PrismDecorator();
 
