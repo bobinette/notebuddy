@@ -12,7 +12,7 @@ import {
   faPlusCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
-interface Note {
+interface NoteSummary {
   name: string;
   filename: string;
 
@@ -42,7 +42,7 @@ const getStaticProps: GetStaticProps = async (): Promise<{ props: Props }> => {
   const postsDirectory = path.join(process.cwd(), process.env.NOTES_DIR);
   const filenames = fs.readdirSync(postsDirectory);
 
-  const notes: Note[] = filenames.map((filename) => {
+  const notes: NoteSummary[] = filenames.map((filename) => {
     const fullFilename = path.join(
       process.cwd(),
       process.env.NOTES_DIR,
