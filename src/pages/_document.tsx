@@ -11,7 +11,11 @@ export default class Document extends NextDocument {
           />
           <link
             rel="stylesheet"
-            href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic"
+            href="//fonts.googleapis.com/css?family=Source Sans Pro:300,300italic,400,400italic,700,700italic"
+          />
+          <link
+            rel="stylesheet"
+            href="//fonts.googleapis.com/css?family=Inter:300,300italic,400,400italic,700,700italic"
           />
           <link
             rel="stylesheet"
